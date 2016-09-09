@@ -1,0 +1,26 @@
+class Solution {
+public:
+	int rob(vector<int>& nums) {
+		int s=nums.size();
+		if(s>=3)
+			nums.at(2)+=nums.at(0);
+		for(int i=0;i<s;i++){
+			for(int j=i-3;j<=i-2&&j>=0;j+=2){
+				int t1=nums.at(j);
+				int t2=nums.at(j+1);
+				if(t1>t2){
+					nums.at(i)+=t1;
+				}
+				else{
+					nums.at(i)+=t2;
+				}
+			}
+		}
+		int max=0;
+		for(int i=0;i<s;i++){
+			if(max<nums.at(i))
+				max=nums.at(i);
+		}
+		return max;
+	}
+};
