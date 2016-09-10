@@ -1,0 +1,29 @@
+void solu(vector<int>& nums, int i)
+{
+	if (nums.size() > 3)
+		nums.at(i+2) += nums.at(i);
+	int count = nums.size() + i - 5;
+	for (; i<=count; i++){
+		int t1 = nums.at(i);
+		int t2 = nums.at(i + 1);
+		nums.at(i + 3) += (t1>t2 ? t1 : t2);
+	}
+}
+
+class Solution {
+public:
+	int rob(vector<int>& nums) {
+		vector<int> nums2(nums);
+		solu(nums, 0);
+		solu(nums2, 1);
+
+		int maxnum = 0;
+		for (int i = 0; i<nums.size(); i++){
+			if (maxnum<nums.at(i))
+				maxnum = nums.at(i);
+			if (maxnum<nums2.at(i))
+				maxnum = nums2.at(i);
+		}
+		return maxnum;
+	}
+};
