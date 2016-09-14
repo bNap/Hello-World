@@ -1,0 +1,25 @@
+typedef pair<int,int> p;
+
+bool comp(p p1,p p2){return p1.second>p2.second;}
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        map<int,int> m;
+        int len=nums.size();
+        for(int i=0;i<len;++i){
+            ++m[nums[i]];
+        }
+        vector<p> temp;
+        vector<int> res;
+        auto it=m.cbegin();
+        while(it!=m.cend()){
+            temp.push_back(*it++);
+        }
+        sort(temp.begin(),temp.end(),comp);
+        for(int i=0;i<k;++i){
+            res.push_back(temp[i].first);
+        }
+        return res;
+    }
+};
