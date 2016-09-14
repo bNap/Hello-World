@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        int len=str.size(),i=0,zf=1;
+        long long num=0;
+        while(str[i]==' ')
+            ++i;
+        if(str[i]=='-'){
+            zf=-1;
+            ++i;
+        }
+        else if(str[i]=='+'){
+            ++i;
+        }
+        for(;i<len;++i){
+            if(str[i]>'9'||str[i]<'0')
+                break;
+            num=num*10+(str[i]-'0');
+            if(num>INT_MAX)
+                return zf==1?INT_MAX:INT_MIN;
+        }
+        return num*zf;
+    }
+};
