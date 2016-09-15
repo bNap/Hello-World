@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        sort(citations.begin(),citations.end());
+        int s=citations.size();
+        if(s==0)
+            return 0;
+        bool zero=true;
+        for(int i=0;i<s;++i)
+            if(citations[i]!=0){
+                zero=false;
+                break;
+            }
+        if(zero)return 0;
+        
+        for(int i=1;i<=s;++i){
+            if(i>=citations[s-i])   //i is the count of papers, citations[s-i] is the citations
+                return citations[s-i]==i?i:i-1;
+        }
+        return s;
+    }
+};
