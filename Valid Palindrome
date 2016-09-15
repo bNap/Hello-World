@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int len=s.size();
+        string str;
+        for(int i=0;i<len;++i){
+            if(isalnum(s[i]))
+                str.push_back(tolower(s[i]));
+        }
+        int len2=str.size();
+        if(len2==0)
+            return true;
+        int loop=0;
+        if(len2%2)  loop=len2/2;    //odd
+        else    loop=len2/2-1;  //even
+        for(int i=0;i<=loop;++i){
+            if(str[i]!=str[len2-1-i])
+                return false;
+        }
+        return true;
+    }
+};
