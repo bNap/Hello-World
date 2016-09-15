@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string convertToTitle(int n) {
+        string res;
+        while(n){
+            if(n%26){
+                res.push_back(n%26-1+'A');
+                n-=n%26;
+            }
+            else{
+                res.push_back('Z');
+                n-=26;
+            }
+            n/=26;
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+};
