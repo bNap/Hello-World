@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        multiset<int> s1(nums1.begin(),nums1.end());
+        multiset<int> s2(nums2.begin(),nums2.end());
+        auto i=s1.begin(),j=s2.begin();
+        vector<int> res;
+        while(i!=s1.end()&&j!=s2.end()){
+            if(*i==*j){
+                res.push_back(*i);
+                ++i;++j;
+            }
+            else if(*i<*j){++i;}
+            else if(*i>*j){++j;}
+        }
+        return res;
+    }
+};
