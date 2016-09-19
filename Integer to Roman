@@ -1,0 +1,38 @@
+struct p{
+	int i;
+	char c;
+};
+
+class Solution {
+public:
+	string intToRoman(int num) {
+		string res;
+		vector<p> m = { { 1000, 'M' },
+		                { 500, 'D' },
+	                	{ 100, 'C' },
+	                	{ 50, 'L' },
+	                	{ 10, 'X' },
+	                	{ 5, 'V' },
+	                	{ 1, 'I' } };
+		auto it = m.begin();
+		auto it2 = m.begin(); ++it2;
+		while (num!=0){
+			while (num>=it->i){
+				res += it->c;
+				num -= it->i;
+			}
+			if(it->i==2*it2->i)
+			    ++it2;
+			if (num!=0&&num >= it->i - it2->i){
+				res += it2->c;res += it->c;
+				num+=it2->i;num-=it->i;
+			}
+			if(it->i==10*it2->i)
+			    --it2;
+			++it; ++it2;
+			if (it2 == m.end())
+				--it2;
+		}
+		return res;
+	}
+};
