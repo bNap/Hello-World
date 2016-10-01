@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        ++rowIndex;
+        vector<int> temp;
+        vector<int> res{1};
+        if(rowIndex<=1)
+            return res;
+        res.resize(rowIndex);
+        for(int i=2;i<=rowIndex;++i){
+            res[0]=1;res[i-1]=1;
+            for(int j=1;j<i-1;++j){
+                res[j]=temp[j-1]+temp[j];
+            }
+            temp=res;
+        }
+        return res;
+    }
+};
