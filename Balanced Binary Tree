@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        for(;;){
+            while(root){
+                sta.push(root);
+                root=root->left;
+            }
+            if(sta.empty())
+                break;
+            root=sta.top();
+            sta.pop();
+            int l=h(root->left);
+            int r=h(root->right);
+            if(abs(l-r)>1)
+                return false;
+            root=root->right;
+        }
+        return true;
+    }
+    
+    int h(TreeNode* root){
+        if(!root)
+            return NULL;
+        return 1+max(h(root->left),h(root->right));
+    }
+    
+private:
+    stack<TreeNode *> sta;    
+};
