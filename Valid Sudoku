@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        int n=9;
+        set<char> temp1,temp2;
+        for(int i=0;i<n;++i){
+            temp1.clear();
+            temp2.clear();
+            for(int j=0;j<n;++j){
+                if(board[i][j]!='.'&&(temp1.insert(board[i][j]).second)!=true)
+                    return false;
+                if(board[j][i]!='.'&&(temp2.insert(board[j][i]).second)!=true)
+                    return false;
+            }
+        }
+        for(int i=1;i<n;i+=3){
+            for(int j=1;j<n;j+=3){
+                temp1.clear();
+                for(int x=i-1;x<=i+1;++x){
+                    for(int y=j-1;y<=j+1;++y){
+                        if(board[x][y]!='.'&&(temp1.insert(board[x][y]).second)!=true)
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
