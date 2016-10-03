@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int A=0;
+        int B=0;
+        int len=secret.length();
+        map<int,int> m1,m2;
+        for(int i=0;i<len;++i){
+            if(secret[i]==guess[i]){
+                ++A;
+                secret[i]='*';
+            }
+            else{
+                ++m1[secret[i]];
+                ++m2[guess[i]];
+            }
+        }
+        for(auto it=m1.begin();it!=m1.end();++it){
+            B+=min((*it).second,m2[(*it).first]);
+        }
+        string res;
+        res+=to_string(A)+'A'+to_string(B)+'B';
+        return res;
+    }
+};
