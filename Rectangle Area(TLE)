@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        float right=max(A,max(C,max(E,G)));
+        float left=min(A,min(C,min(E,G)));
+        float top=max(B,max(D,max(F,H)));
+        float bottom=min(B,min(D,min(F,H)));
+        int res=0;
+        for(float i=left+0.5;i<=right;++i){
+            for(float j=bottom+0.5;j<=top;++j){
+                if((i>=A&&i<=C||i<=C&&i>=A)&&(j>=B&&j<=D||j<=B&&j>=D)
+                 ||(i>=E&&i<=G||i<=E&&i>=G)&&(j>=F&&j<=H||j<=F&&j>=H)){
+                     ++res;
+                 }
+            }
+        }
+        return res;
+    }
+};
