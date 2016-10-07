@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findNthDigit(int n) {
+        string res;
+        int count=10;
+        int temp=n;
+        int dec=0;
+        for(int i=1;i<=temp;++i){
+            if(i/count){
+                count*=10;
+                ++dec;
+            }
+            temp-=dec;
+            res+=to_string(i);
+        }
+        return res[n-1]-48;
+    }
+};
