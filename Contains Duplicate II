@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int,int> m;
+        int len=nums.size();
+        if(len<=0||k==0)
+            return false;
+        if(k>len)
+            k=len;
+        for(int i=0;i<k;++i){
+            if(++m[nums[i]]==2)
+                return true;
+        }
+        for(int i=k;i<len;++i){
+            if(++m[nums[i]]==2)
+                return true;
+            --m[nums[i-k]];
+        }
+        return false;
+    }
+};
