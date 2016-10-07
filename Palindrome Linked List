@@ -1,0 +1,38 @@
+class Solution {
+public:
+	bool isPalindrome(ListNode* head) {
+		if (!head || !head->next)
+			return true;
+		bool odd = false;
+		ListNode *fast = head, *slow = head;
+		while (1){
+			if (!fast->next){
+				odd = true;
+				break;
+			}
+			else if (!fast->next->next){
+				break;
+			}
+			fast = fast->next->next;
+			slow = slow->next;
+		}
+		ListNode *t1 = head, *t2 = head->next;
+		t1->next = nullptr;
+		while (t1 != slow){
+			ListNode *temp = t2->next;
+			t2->next = t1;
+			t1 = t2;
+			t2 = temp;
+		}
+		if (odd){
+			t1 = t1->next;
+		}
+		while (t1){
+			if (t1->val != t2->val)
+				return false;
+			t1 = t1->next;
+			t2 = t2->next;
+		}
+		return true;
+	}
+};
