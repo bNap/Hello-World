@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int i = a.size();
+        int j = b.size();
+        string result;
+        int bit = 0;
+        int an = atoi(string(a, i - 1, 1).c_str());
+        int bn = atoi(string(b, j - 1, 1).c_str());
+        while (i > 0 || j > 0 || bit == 1) {
+            int sum = bit + an + bn;
+            switch (sum) {
+                case 0:
+                    result += '0';
+                    bit = 0;
+                    break;
+                case 1:
+                    result += '1';
+                    bit = 0;
+                    break;
+                case 2:
+                    result += '0';
+                    bit = 1;
+                    break;
+                case 3:
+                    result += '1';
+                    bit = 1;
+                    break;
+            }
+            if (i-- > 0) 
+                an = (i == 0) ? 0 : atoi(string(a, i - 1, 1).c_str());
+            if (j-- > 0) 
+                bn = (j == 0) ? 0 : atoi(string(b, j - 1, 1).c_str());
+        }
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
